@@ -1,0 +1,73 @@
+:root {
+  --colour-white: #FDFEFE;
+  --colour-black: #17202A;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* iOS Safari */
+  -webkit-touch-callout: none;
+  /* Safari */
+  -webkit-user-select: none;
+  /* Konqueror HTML */
+  -khtml-user-select: none;
+  /* Old versions of Firefox */
+  -moz-user-select: none;
+  /* Internet Explorer/Edge */
+  -ms-user-select: none;
+  user-select: none;
+}
+
+html, body {
+  height: 100dvh;
+  width: 100dvw;
+  overflow: hidden; /* preventing 1px appearing below canvas / preventing mac weird scroll/stretch of page */
+  touch-action: none; /* without this, the pointerup event doesn't fire */
+}
+
+#render-area {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+}
+
+#render-area canvas {
+  background-color: black;
+  image-rendering: pixelated;
+
+  /* 16 / 9 here is our aspect ratio. this should be added automatically by the client but hardcoding for now */
+  aspect-ratio: 16 / 9; 
+  width: min(100%, 100vh * 16 / 9); /* as far as i understand this should be vw not vh but vh works perfectly ??? so going to leave as is. */
+}
+
+/* TODO: make this message configurale via client config */
+@media only screen and (orientation: landscape) {
+  .mobile-rotate-overlay {
+    display: none;
+  }
+}
+
+@media only screen and (orientation: portrait) {
+  .mobile-rotate-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: black;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+}
